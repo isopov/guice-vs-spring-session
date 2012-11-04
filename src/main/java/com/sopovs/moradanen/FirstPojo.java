@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.google.inject.servlet.SessionScoped;
+import javax.inject.Provider;
 
 @SessionScoped
 @Component
@@ -13,15 +14,14 @@ import com.google.inject.servlet.SessionScoped;
 public class FirstPojo {
 
 	@Inject
-	private SecondPojo second;
+	private Provider<SecondPojo> second;
 
 	public String sayHello() {
 		return "Hello";
 	}
 
 	public String secondSayHello() {
-		return second.sayHello();
-		// return "Hello";
+		return second.get().sayHello();
 	}
 
 }
